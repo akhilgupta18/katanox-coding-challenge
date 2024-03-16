@@ -1,3 +1,24 @@
+# Full Solution Submitted by Akhil Gupta
+
+## How to Run
+Command: ```make build-run-docker```
+- Created Makefile, above command is part of this file which compiles and runs the application.
+- Builds the api services and the jar with corresponding docker image.
+- Runs the application via docker.
+
+## System requirements
+Java 17, Maven, Docker
+
+## Swagger Link
+http://localhost:8080/swagger-ui/index.html
+
+- Once the application is running, you can go to the above link and see the swagger.
+
+## Key Points
+- Added validations on the input of Booking Request.
+- Added another table `bookings` to keep track of successful bookings, also helps in returning the BookingId.
+- Added Integration and Unit tests.
+
 # Katanox Coding Challenge
 
 The aim of this task is to refactor and extend an API using Java OR Kotlin and Spring Boot which allows users to search
