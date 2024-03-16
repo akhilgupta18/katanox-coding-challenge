@@ -1,6 +1,6 @@
-package com.katanox.api;
+package com.katanox.api.search;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.katanox.api.common.logger.LogWriterService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,22 +9,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("search")
 public class SearchController {
-
     @Value("${env}")
     String environment;
-
-    @Autowired
     LogWriterService logWriterService;
+    SearchService searchService;
 
-    public SearchController() {
+    public SearchController(SearchService searchService) {
         this.logWriterService = new LogWriterService();
+        this.searchService = searchService;
     }
 
     @PostMapping(
@@ -34,12 +33,11 @@ public class SearchController {
     ResponseEntity<SearchResponse> search(
             @RequestBody SearchRequest request
     ) {
-        var result = new java.util.ArrayList<>(List.of());
+        SearchResponse response = searchService.search(request);
 
-        if (environment == "local") {
-            logWriterService.logStringToConsoleOutput(result.toString());
+        if (Objects.equals(environment, "local")) {
+            logWriterService.logStringToConsoleOutput(response.getAvailableRooms().toString());
         }
-        return new ResponseEntity<>(new SearchResponse(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
-
 }

@@ -1,4 +1,4 @@
-package com.katanox.api;
+package com.katanox.api.common.queue;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
