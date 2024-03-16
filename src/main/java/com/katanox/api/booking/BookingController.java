@@ -1,5 +1,4 @@
-package com.katanox.api;
-
+package com.katanox.api.booking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("booking")
 public class BookingController {
-
     @Autowired
     BookingService bookingService;
 
@@ -28,6 +26,4 @@ public class BookingController {
         var result = bookingService.booking(request);
         return new ResponseEntity<>(new BookingResponse(result), HttpStatus.ACCEPTED);
     }
-
-
 }
